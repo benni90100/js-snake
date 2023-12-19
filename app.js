@@ -8,7 +8,9 @@ let snakeBody = []
 let velocityX = 0, velocityY = 0;
 let setIntervalId;
 let scoreUpdate = 0
+//punteggio
 let higthScore = localStorage.getItem("higth-score") || 0
+higthScoreElement.innerText = `higth score: ${higthScore}`
 
 const changePosition = () => {
     //funzione che cambia la posizione da 0 a 30
@@ -41,7 +43,7 @@ const handeGameOver = () => {
     // initGame()
     clearInterval(setIntervalId)
     location.reload()
-    localStorage.getItem(scoreUpdate)
+    // localStorage.getItem(scoreUpdate)
 }
 
 
@@ -54,9 +56,11 @@ const initGame = () => {
         snakeBody.push([foodX, foodY])
         console.log(snakeBody);
         scoreUpdate++
-        higthScore = scoreUpdate => higthScore ? scoreUpdate : higthScore
-        localStorage.setItem(`higth-score ${higthScore}`)
-        higthScoreElement.innerText = `score: ${higthScore}`
+        score.innerText = `score: ${scoreUpdate}`
+        higthScore = scoreUpdate > higthScore ? scoreUpdate : higthScore
+        console.log(higthScore);
+        localStorage.setItem(`higth-score`, higthScore)
+        higthScoreElement.innerText = `higth score: ${higthScore}`
 
     }
     for (let i = snakeBody.length - 1; i > 0; i--) {
